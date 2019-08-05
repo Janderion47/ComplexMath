@@ -50,7 +50,7 @@ for x in range(img.size[0]):
 	# displaying the progress as percentage
 	
 	how_long = float((t.time()) - start)
-	percent = "%.7f %%" % (x / ImageSideLength * 100.0)
+	percent = "%.9f %%" % (x / ImageSideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
 	write.writerow({'TimePassed': w_tp,
