@@ -86,23 +86,15 @@ while tt_s >= 60:
 	tt_m += 1
 	tt_s -= 60
 
-if len(str(tt_w)) == 1:
-	tt['w'] = ('0' + str(tt_w))
-if len(str(tt_w)) == 2:
-	tt['w'] = str(tt_w)
-if len(str(tt_d)) == 1:
-	tt['d'] = ('0' + str(tt_d))
-if len(str(tt_d)) == 2:
-	tt['d'] = str(tt_d)
-if len(str(tt_h)) == 1:
-	tt['h'] = ('0' + str(tt_h))
-if len(str(tt_h)) == 2:
-	tt['h'] = str(tt_h)
-if len(str(tt_m)) == 1:
-	tt['m'] = ('0' + str(tt_m))
-if len(str(tt_m)) == 2:
-	tt['m'] = str(tt_m)
-tt['s'] = str(tt_s)
+tt['w'] = '{:02d}'.format(tt_w)
+tt['d'] = '{:02d}'.format(tt_d)
+tt['h'] = '{:02d}'.format(tt_h)
+tt['m'] = '{:02d}'.format(tt_m)
+if (str(tt_s))[1] == '.':
+	tt['s'] = ('0' + str(tt_s))
+else:
+	tt['s'] = str(tt_s)
+
 
 print("100%")
 print("Total Processing time was: " + str(tt['w']) + ':' + str(tt['d']) + ':' + str(tt['h']) + ':' + str(
