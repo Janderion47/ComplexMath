@@ -48,7 +48,7 @@ for x in range(img.size[0]):
 	# displaying the progress as percentage
 	
 	how_long = float((t.time()) - start)
-	percent = "%.4f %%" % (x / ImageSideLength * 100.0)
+	percent = "%.7f %%" % (x / ImageSideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
 	write.writerow({'TimePassed': w_tp, 'Percentage': percent})
@@ -60,11 +60,11 @@ img.save(png_name)
 
 end = t.time()
 
-tt_s = float(end - start)  # Total time Seconds etc
-tt_m = 0
-tt_h = 0
-tt_d = 0
-tt_w = 0
+total_seconds = float(end - start)  # Total time Seconds etc
+total_minutes = 0
+total_hours = 0
+total_days = 0
+total_weeks = 0
 tt = {
 	'w': None,
 	'd': None,
@@ -73,31 +73,27 @@ tt = {
 	's': None
 	}
 
-while tt_s >= 604_800:  # Seconds in a week
-	tt_w += 1
-	tt_s -= 604_800
-while tt_s >= 86_400:  # Seconds in a day
-	tt_d += 1
-	tt_s -= 86_400
-while tt_s >= 3_600:
-	tt_h += 1
-	tt_s -= 3_600
-while tt_s >= 60:
-	tt_m += 1
-	tt_s -= 60
+total_weeks += int(total_seconds // 604_800)
+total_seconds = total_seconds % 604_800
+total_days += int(total_seconds // 86_400)
+total_seconds = total_seconds % 86_400
+total_hours += int(total_seconds // 3600)
+total_seconds = total_seconds % 3600
+total_minutes += int(total_seconds // 60)
+total_seconds = total_seconds % 60
 
-tt['w'] = '{:02d}'.format(tt_w)
-tt['d'] = '{:02d}'.format(tt_d)
-tt['h'] = '{:02d}'.format(tt_h)
-tt['m'] = '{:02d}'.format(tt_m)
-if (str(tt_s))[1] == '.':
-	tt['s'] = ('0' + str(tt_s))
+tt['w'] = '{:02}'.format(total_weeks)
+tt['d'] = '{:02}'.format(total_days)
+tt['h'] = '{:02}'.format(total_hours)
+tt['m'] = '{:02}'.format(total_minutes)
+if (str(total_seconds))[1] == '.':
+	tt['s'] = ('0' + str(total_seconds))
 else:
-	tt['s'] = str(tt_s)
+	tt['s'] = str(total_seconds)
 
 
 print("100%")
 print("Total Processing time was: " + str(tt['w']) + ':' + str(tt['d']) + ':' + str(tt['h']) + ':' + str(
 	tt['m']) + ':' + str(tt['s']))
 print('The time is written weeks, days, hours, minutes, and seconds.')
-write.writerow({'TimePassed': tt_s, 'Percentage': "100 %"})
+write.writerow({'TimePassed': total_seconds, 'Percentage': "100 %"})
