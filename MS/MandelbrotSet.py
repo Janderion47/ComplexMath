@@ -35,10 +35,12 @@ def mandelbrot(x, y):
 
 csv_log = open(csv_name, mode = 'w')
 header = ['TimePassed', 'Percentage']
-write = csv.DictWriter(csv_log, fieldnames = header)
+write = csv.DictWriter(csv_log,
+					   fieldnames = header)
 write.writeheader()
 
-img = Image.new('RGB', (ImageSideLength, ImageSideLength))
+img = Image.new('RGB', (ImageSideLength,
+						ImageSideLength))
 pixels = img.load()
 
 print("Size: " + str(ImageSideLength))
@@ -51,7 +53,8 @@ for x in range(img.size[0]):
 	percent = "%.7f %%" % (x / ImageSideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
-	write.writerow({'TimePassed': w_tp, 'Percentage': percent})
+	write.writerow({'TimePassed': w_tp,
+					'Percentage': percent})
 	for y in range(img.size[1]):
 		pixels[x, y] = mandelbrot((x - (0.75 * ImageSideLength)) / (ImageSideLength / 3),
 								  (y - (0.50 * ImageSideLength)) / (ImageSideLength / 3))
@@ -96,4 +99,5 @@ print("100%")
 print("Total Processing time was: " + str(tt['w']) + ':' + str(tt['d']) + ':' + str(tt['h']) + ':' + str(
 	tt['m']) + ':' + str(tt['s']))
 print('The time is written weeks, days, hours, minutes, and seconds.')
-write.writerow({'TimePassed': total_seconds, 'Percentage': "100 %"})
+write.writerow({'TimePassed': total_seconds,
+				'Percentage': "100 %"})
