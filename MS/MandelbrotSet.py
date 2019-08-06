@@ -3,7 +3,7 @@
 
 import colorsys
 import csv
-import time as t
+from time import time
 from PIL import Image
 from numpy import complex, array
 
@@ -13,7 +13,7 @@ name = input('What will the file we called?: ')
 csv_name = (name + '_log.csv')
 png_name = (name + '.png')
 
-start = t.time()
+start = time()
 
 
 # a function to return a tuple of colors as integer value of rgb
@@ -33,7 +33,7 @@ def mandelbrot(x, y):
 	return 0, 0, 0
 
 
-csv_log = open(csv_name, mode = 'w')
+csv_log = open(csv_name, mode = 'width')
 header = ['TimePassed', 'Percentage']
 write = csv.DictWriter(csv_log,
 					   fieldnames = header)
@@ -49,7 +49,7 @@ for x in range(img.size[0]):
 	
 	# displaying the progress as percentage
 	
-	how_long = float((t.time()) - start)
+	how_long = float((time()) - start)
 	percent = "%.9f %%" % (x / ImageSideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
@@ -61,20 +61,14 @@ for x in range(img.size[0]):
 
 img.save(png_name)
 
-end = t.time()
+end = time()
 
 total_seconds = float(end - start)  # Total time Seconds etc
 total_minutes = 0
 total_hours = 0
 total_days = 0
 total_weeks = 0
-tt = {
-	'w': None,
-	'd': None,
-	'h': None,
-	'm': None,
-	's': None
-	}
+tt = {}
 
 total_weeks += int(total_seconds // 604_800)
 total_seconds = total_seconds % 604_800
@@ -85,9 +79,9 @@ total_seconds = total_seconds % 3600
 total_minutes += int(total_seconds // 60)
 total_seconds = total_seconds % 60
 
-tt['w'] = '{:02}'.format(total_weeks)
+tt['width'] = '{:02}'.format(total_weeks)
 tt['d'] = '{:02}'.format(total_days)
-tt['h'] = '{:02}'.format(total_hours)
+tt['height'] = '{:02}'.format(total_hours)
 tt['m'] = '{:02}'.format(total_minutes)
 if (str(total_seconds))[1] == '.':
 	tt['s'] = ('0' + str(total_seconds))
@@ -96,7 +90,7 @@ else:
 
 
 print("100%")
-print("Total Processing time was: " + str(tt['w']) + ':' + str(tt['d']) + ':' + str(tt['h']) + ':' + str(
+print("Total Processing time was: " + str(tt['width']) + ':' + str(tt['d']) + ':' + str(tt['height']) + ':' + str(
 	tt['m']) + ':' + str(tt['s']))
 print('The time is written weeks, days, hours, minutes, and seconds.')
 write.writerow({'TimePassed': total_seconds,
