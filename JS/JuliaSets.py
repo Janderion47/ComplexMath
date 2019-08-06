@@ -6,10 +6,6 @@ import csv
 # driver function
 if __name__ == "__main__":
 	
-	name = input('What will the file we called?: ')
-	csv_name = (name + '_log.csv')
-	png_name = (name + '.png')
-	
 	start = time()
 	
 	# setting the width, height and zoom
@@ -29,9 +25,23 @@ if __name__ == "__main__":
 	moveX, moveY = 0.0, 0.0
 	maxIter = 255
 	
+	name = ('w' + str(width) + 'h' + str(height) + 'z' + str(zoom) + 'mI' + str(maxIter) + '_L_[' + str(cX) + ',' + str(
+		cY) + ']')
+	csv_name = (name + '_log.csv')
+	png_name = (name + '.png')
+	
+	csv_log = open(csv_name, mode = 'w')
+	header = ['TimePassed', 'Percentage']
+	write = csv.DictWriter(csv_log, fieldnames = header)
+	write.writeheader()
+	
 	for x in range(img.size[0]):
-		percent = "%.7f %%" % (x / img.size[0] * 100.0)
-		print(percent)
+		how_long = float((time()) - start)
+		percent = "%.9f %%" % (x / img.size[0] * 100.0)
+		print(percent + " Time since start: " + str(how_long) + "s")
+		w_tp = str(how_long)
+		
+		write.writerow({'TimePassed': w_tp, 'Percentage': percent})
 		for y in range(img.size[1]):
 			zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
 			zy = 1.0 * (y - height / 2) / (0.5 * zoom * height) + moveY
@@ -48,6 +58,8 @@ if __name__ == "__main__":
 	# to display the created fractal
 	img.show()
 	img.save(png_name)
+	
 	end = time()
 	total_time = float(end - start)
+	write.writerow({'TimePassed': total_time, 'Percentage': '100 %'})
 	print(total_time)
