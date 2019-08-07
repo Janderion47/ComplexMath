@@ -7,7 +7,7 @@ from time import time
 from PIL import Image
 from numpy import complex, array
 
-ImageSideLength = int(input("Side length: "))
+SideLength = int(input("Side length: "))
 
 name = input('What will the file we called?: ')
 csv_name = (name + '_log.csv')
@@ -34,27 +34,27 @@ def mandelbrot(x, y):
 
 
 csv_log = open(csv_name, mode = 'w')
-header = ['TimePassed', 'Percentage']
+header = ['Time Passed', 'Percentage']
 write = csv.DictWriter(csv_log, fieldnames = header)
 write.writeheader()
 
-img = Image.new('RGB', (ImageSideLength, ImageSideLength))
+img = Image.new('RGB', (SideLength, SideLength))
 pixels = img.load()
 
-print("Size: " + str(ImageSideLength))
+print("Size: " + str(SideLength))
 print("Attempt: " + name)
 for x in range(img.size[0]):
 	
 	# displaying the progress as percentage
 	
 	how_long = float((time()) - start)
-	percent = "%.9f %%" % (x / ImageSideLength * 100.0)
+	percent = "%.9f %%" % (x / SideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
-	write.writerow({'TimePassed': w_tp, 'Percentage': percent})
+	write.writerow({'Time Passed': w_tp, 'Percentage': percent})
 	for y in range(img.size[1]):
-		pixels[x, y] = mandelbrot((x - (0.75 * ImageSideLength)) / (ImageSideLength / 3),
-								  (y - (0.50 * ImageSideLength)) / (ImageSideLength / 3))
+		pixels[x, y] = mandelbrot((x - (0.75 * SideLength)) / (SideLength / 3),
+								  (y - (0.50 * SideLength)) / (SideLength / 3))
 
 img.save(png_name)
 
@@ -89,5 +89,4 @@ print("100%")
 print("Total Processing time was: " + str(tt['width']) + ':' + str(tt['d']) + ':' + str(tt['height']) + ':' + str(
 	tt['m']) + ':' + str(tt['s']))
 print('The time is written weeks, days, hours, minutes, and seconds.')
-write.writerow({'TimePassed': total_seconds,
-				'Percentage': "100 %"})
+write.writerow({'Time Passed': total_seconds, 'Percentage': "100 %"})
