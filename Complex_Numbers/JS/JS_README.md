@@ -8,7 +8,8 @@ JuliaSets.py is dependent on:
     - time
     - csv
 
-Description: This code will create an image of a Julia set
+Description: This code will create an image of a Julia set of specified
+values.
 
 Questions go to
 [u/Janderion47](https://www.reddit.com/user/JanDerion47)

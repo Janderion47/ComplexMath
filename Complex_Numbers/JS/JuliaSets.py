@@ -1,27 +1,28 @@
-# Python code for Julia Fractal
-from PIL import Image
-from time import time
-import csv
+# Python code for Julia Fractal based on the code from https://www.geeksforgeeks.org/julia-fractal-python/
 
 # driver function
 if __name__ == "__main__":
+	from PIL import Image
+	from time import time
+	import csv
 	
 	start = time()  # Time to start measuring how much time it takes for the chaos to finish
 	
 	# Setting the width, height and zoom of the image to be created
 	width, height, zoom = 1920, 1080, 1  # Standard is 1920, 1080, 1
 	
+	# Setting up the variables according to the chaotic Julia Sets equation to create the fractal
+	cX, cY = .2, .2
+	moveX, moveY = 0, 0
+	maxIter = 255
+	
 	img = Image.new("RGB", (width, height), "white")  # creating the new image in RGB mode
 	pixel = img.load()  # Allocating the storage for the image and loading the pixel data.
 	
-	# Setting up the variables according to the chaotic Julia Sets equation to create the fractal
-	cX, cY = 1, 1
-	moveX, moveY = 0.0, 0.0
-	maxIter = 255
-	
 	# Preparing stuff
-	name = ('w' + str(width) + 'h' + str(height) + 'z' + str(zoom) + 'mI' + str(maxIter) + '_L_[' + str(cX) + ',' + str(
-		cY) + ']')
+	name = ('w' + str(width) + 'h' + str(height) + 'z' + str(zoom) + 'mI' + str(maxIter) + '_L_(' + str(cX) + ',' + str(
+		cY) + ')_m_(' + str(moveX) + ', ' + str(moveY) + ')')
+	# If it is not clear already, the info in the first brackets in name is the location [x, y]
 	csv_name = (name + '_log.csv')
 	png_name = (name + '.png')
 	
@@ -32,30 +33,30 @@ if __name__ == "__main__":
 	write.writeheader()
 	
 	for x in range(img.size[0]):
-		# displaying the progress as percentage
+		for y in range(img.size[1]):
+			# Actual Maths
+			zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
+			zy = 1.0 * (y - height / 2) / (0.5 * zoom * height) + moveY
+			i = maxIter
+			while (zx ** 2) + (zy ** 2) < 4 and i > 1:
+				# Complicated Maths
+				zy, zx = 2.0 * zx * zy + cY, (zx ** 2) - (zy ** 2) + cX
+				i -= 1
+			
+			# Convert byte to RGB (3 bytes), kinda magic to get nice colors
+			pixel[x, y] = (i << 21) + (i << 10) + i * 8
+		
+		# Displaying the progress as percentage
 		how_long = float((time()) - start)
 		percent = "%.9f %%" % (x / img.size[0] * 100.0)
 		print(percent + " Time since start: " + str(how_long) + "s")  # Displayed progress as percentage and
 		w_tp = str(how_long)  # how long it has been so far
 		write.writerow({'Time Passed': w_tp, 'Percentage': percent})
-		
-		for y in range(img.size[1]):
-			# Actual math
-			zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
-			zy = 1.0 * (y - height / 2) / (0.5 * zoom * height) + moveY
-			i = maxIter
-			while (zx ** 2) + zy * zy < 4 and i > 1:
-				tmp = (zx ** 2) - (zy ** 2) + cX
-				zy, zx = 2.0 * zx * zy + cY, tmp
-				i -= 1
-			
-			# convert byte to RGB (3 bytes), kinda magic to get nice colors
-			pixel[x, y] = (i << 21) + (i << 10) + i * 8
 	
-	# to display the created fractal of a mess
+	# To display the created fractal of a mess
 	img.show()
 	img.save(png_name)
-	end = time()
+	end = time()  # Time to start calculating how long the computer had to suffer to create the mess
 	
 	# Stole the time processing code from the Mandelbrot Set code
 	total_seconds = float(end - start)  # Total time Seconds etc

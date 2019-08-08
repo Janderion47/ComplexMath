@@ -1,6 +1,5 @@
 # Python code for Mandelbrot Fractal
 
-
 import colorsys
 import csv
 from time import time
@@ -16,13 +15,13 @@ png_name = (name + '.png')
 start = time()
 
 
-# a function to return a tuple of colors as integer value of rgb
+# A function to return a tuple of colors as integer value of rgb
 def rgb_conv(i):
 	color = 255 * array(colorsys.hsv_to_rgb(1.0, i / 255.0, 0.5))
 	return tuple(color.astype(int))
 
 
-# function defining a mandelbrot
+# Function defining a mandelbrot
 def mandelbrot(x, y):
 	c0 = complex(x, y)
 	c = 0
@@ -45,16 +44,16 @@ print("Size: " + str(SideLength))
 print("Attempt: " + name)
 for x in range(img.size[0]):
 	
-	# displaying the progress as percentage
+	for y in range(img.size[1]):
+		pixels[x, y] = mandelbrot((x - (0.75 * SideLength)) / (SideLength / 3),
+								  (y - (0.50 * SideLength)) / (SideLength / 3))
 	
+	# Displaying the progress as percentage
 	how_long = float((time()) - start)
 	percent = "%.9f %%" % (x / SideLength * 100.0)
 	print(percent + " Time since start: " + str(how_long) + "s")
 	w_tp = str(how_long)
 	write.writerow({'Time Passed': w_tp, 'Percentage': percent})
-	for y in range(img.size[1]):
-		pixels[x, y] = mandelbrot((x - (0.75 * SideLength)) / (SideLength / 3),
-								  (y - (0.50 * SideLength)) / (SideLength / 3))
 
 img.save(png_name)
 
