@@ -1,11 +1,17 @@
-## Complex Math
+# Complex Math
 This file is basically unnecessary.
 
 There is a README markdown file in each folder, other than ".idea"; each
 README gives an explanation of the contents within each folder.
 
-Plans to do in the future:
-- Feigenbaum Constant/Logistic Map
+## Completed Already:
+- Complex Numbers:
+    - Mandelbrot Set
+    - Julia Sets
+## In Progress:
+- [Lunar Arithmetic/Dismal or Lunar Primes](https://youtu.be/cZkGeR9CWbk)
+## Plans to do in the future:
+- [Feigenbaum Constant/Logistic Map](https://youtu.be/ETrYE4MdoLQ)
 - Quantum Mechanics
 
 Have fun reading and trying to comprehend how much the code has been

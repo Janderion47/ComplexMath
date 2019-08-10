@@ -1,4 +1,4 @@
-## Multiplicative Persistence
+# Multiplicative Persistence
 This code was converted to Python3 from the Python2 code from the
 Youtube channel "Numberphile". the two videos:
 [Original video](https://youtu.be/Wim9WJeDTHQ) &
