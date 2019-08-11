@@ -14,11 +14,11 @@ README gives an explanation of the contents within each folder.
 - [Feigenbaum Constant/Logistic Map](https://youtu.be/ETrYE4MdoLQ)
 - Quantum Mechanics
 
-Have fun reading and trying to comprehend how much the code has been
-edited.
+Have fun reading and trying to comprehend how much the code has been edited.
 
 Questions go to
 [u/Janderion47](https://www.reddit.com/user/JanDerion47)
 
 Issues to the
 [issues tab](https://github.com/TheUnknownJp/ComplexMath/issues)
+
