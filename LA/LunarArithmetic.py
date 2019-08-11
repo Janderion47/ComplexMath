@@ -22,6 +22,7 @@ def add(a, b):
 def mult(a, b):
 	sa, sb = str(a), str(b)
 	
+	# Expanding input a
 	lista = []
 	indexa = -1
 	powera = 0
@@ -31,6 +32,7 @@ def mult(a, b):
 		indexa -= 1
 		powera += 1
 	
+	# Expanding input b
 	listb = []
 	indexb = -1
 	powerb = 0
@@ -39,13 +41,10 @@ def mult(a, b):
 		listb.insert(0, number)
 		indexb -= 1
 		powerb += 1
+
+
+# Multiplying lists a and b
 	
-	compiled_list = []
-	for ai in lista:
-		for bi in listb:
-			out = str(max(ai[0], bi[0]))
-			
-			compiled_list.insert(0, out)
 
 
 mult(1234, 12345)
