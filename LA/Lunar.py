@@ -48,7 +48,6 @@ def multiply(a, b):
 		
 		compiled_list.insert(0, str(a_list_string))
 	
-	# TODO Finish Lunar Multiply
 	total = 0
 	for i in range(0, len(compiled_list)):
 		total = add(total, compiled_list[i])
