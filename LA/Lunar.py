@@ -10,6 +10,13 @@ def add(a, b):
 	while n < length_of_longest_str:
 		ai, bi = int(sa[index]), int(sb[index])
 		
+		la = len(sa)
+		lb = len(sb)
+		if la > lb:
+			sb += "0" * (la - lb)
+		elif lb > la:
+			sa += "0" * (lb - la)
+		
 		out = str(min(ai, bi))
 		outout.insert(0, out)
 		
@@ -33,7 +40,7 @@ def multiply(a, b):
 		
 		a_step = 0
 		for a_item in a_string:
-			a_zeros = (10 ** a_step) * (b_zeros)
+			a_zeros = (10 ** a_step) * b_zeros
 			
 			ab_max = max(int(a_item), int(b_item))
 			
@@ -50,7 +57,7 @@ def multiply(a, b):
 	
 	total = 0
 	for i in range(0, len(compiled_list)):
-		total = add(total, compiled_list[i])
+		total += add(total, compiled_list[i])
 	
 	return total
 
