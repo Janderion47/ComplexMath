@@ -1,7 +1,7 @@
 # Lunar Arithmetic
 
 ## Understanding the math
-When you add two numbers, the sum is the number which is lower.
+When you addition two numbers, the sum is the number which is lower.
 For example: `1 + 2 = 1`
 
 when you multiply two numbers, the product is the number which is higher.

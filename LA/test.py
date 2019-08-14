@@ -1,4 +1,4 @@
-from LA.Lunar import add
+from LA.Lunar import addition
 
-test = add(12345, 54321)
+test = addition(12345, 54321)
 print(test)

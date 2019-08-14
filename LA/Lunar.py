@@ -1,29 +1,29 @@
 # Lunar Arithmetic, Here we go boys
-def add(a, b):
-	sa, sb = str(a), str(b)
+def addition(a, b):
+	a_string, b_string = str(a), str(b)
 	
-	length_of_longest_str = max(len(sa), len(sb))
+	length_of_longest_str = max(len(a_string), len(b_string))
 	
-	outout = []
-	index = -1
-	n = 0
-	while n < length_of_longest_str:
-		ai, bi = int(sa[index]), int(sb[index])
+	list_to_be_converted_to_string = []
+	index_to_be_viewed = -1
+	the_variable_that_makes_sure_we_do_not_mess_up = 0
+	while the_variable_that_makes_sure_we_do_not_mess_up < length_of_longest_str:
+		a_integer, b_string = int(a_string[index_to_be_viewed]), int(b_string[index_to_be_viewed])
 		
-		la = len(sa)
-		lb = len(sb)
-		if la > lb:
-			sb += "0" * (la - lb)
-		elif lb > la:
-			sa += "0" * (lb - la)
+		a_length = len(a_string)
+		b_length = len(b_string)
+		if a_length > b_length:
+			b_string += "0" * (a_length - b_length)
+		elif b_length > a_length:
+			a_string += "0" * (b_length - a_length)
 		
-		out = str(min(ai, bi))
-		outout.insert(0, out)
+		out = str(min(a_integer, b_string))
+		list_to_be_converted_to_string.insert(0, out)
 		
-		n += 1
-		index -= 1
+		the_variable_that_makes_sure_we_do_not_mess_up += 1
+		index_to_be_viewed -= 1
 	
-	output = int(''.join(outout))
+	output = int(''.join(list_to_be_converted_to_string))
 	return output
 
 
@@ -50,19 +50,21 @@ def multiply(a, b):
 		b_step += 1
 		
 		a_list_string = 0
-		for i in a_list:
-			a_list_string += int(i)
+		for the_thing in a_list:
+			a_list_string += int(the_thing)
 		
 		compiled_list.insert(0, str(a_list_string))
 	
-	total = 0
-	for i in range(0, len(compiled_list)):
-		total += add(total, compiled_list[i])
+	total = int(compiled_list[0])
+	for the_thing in range(1, len(compiled_list)):
+		memory_int = addition(total, compiled_list[the_thing])
+		total *= 0
+		total += memory_int
 	
 	return total
 
 
-test = multiply(1111, 1111)
+test = multiply(12, 12)
 print(test)
 
 # https://youtu.be/QH2-TGUlwu4
